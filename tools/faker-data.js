@@ -8,9 +8,9 @@ async function start() {
     const startTime = new Date().getTime()
     try {
         await client.connect()
-        // await createCategories()
-        // await createProducts()
-        // await createSuppliers()
+        await createCategories()
+        await createProducts()
+        await createSuppliers()
         await relations()
         await client.end()
     } catch (e) {
