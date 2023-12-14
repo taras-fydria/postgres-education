@@ -9,7 +9,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       PGDATA: /data/postgres
     volumes:
-      - ./postgres:/data/postgres
+      - ./docker/postgres:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     networks:
@@ -23,18 +23,14 @@ services:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
     volumes:
-      - ./pgadmin:/var/lib/pgadmin
-
+      - ./docker/pgadmin:/var/lib/pgadmin
     ports:
-      - "5051:80"
+      - "5050:80"
     networks:
       - postgres-education
     restart: unless-stopped
+    user: "${UID}:${GID}"
 
 networks:
   postgres-education:
     driver: bridge
-
-volumes:
-  postgres:
-  pgadmin:
